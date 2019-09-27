@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Previsão do tempo</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Previsão do tempo</h1>
+		</div>
+		<form class="form-inline" method="post" th:object="${previsao}" th:action="@{/previsao}" style="margin: 20px 0">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Cidade" th:field="*{cidade}" /> 
+				<input type="text" class="form-control"	placeholder="Dia da Semana" th:field="*{semana}" />				
+				<input type="text" class="form-control"	placeholder="Temperatura Minima" th:field="*{tempmin}" />
+				<input type="text" class="form-control"	placeholder="Temperatura Maxima" th:field="*{tempmax}" />
+				<input type="text" class="form-control"	placeholder="Humidade" th:field="*{humidade}" />
+				<input type="text" class="form-control"	placeholder="Descricao" th:field="*{descricao}" />
+				<input type="text" class="form-control"	placeholder="Horario" maxlength="5" data-mask="23:59" th:field="*{hora}" />
+				<button type="submit" class="btn btn-primary">Adicionar</button>
+			</div>
+		</form>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Cidade</th>
+						<th>Dia da Semana</th>
+						<th>Temperatura Minima</th>
+						<th>Temperatura Maxima</th>
+						<th>Humidade</th>
+						<th>Descricao</th>
+						<th>Horario</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="previsao : ${previsa}">
+						<td th:text="${previsao.cidade}"></td>
+						<td th:text="${previsao.semana}"></td>
+						<td th:text="${previsao.tempmin}"></td>
+						<td th:text="${previsao.tempmax}"></td>
+						<td th:text="${previsao.humidade}"></td>
+						<td th:text="${previsao.descricao}"></td>
+						<td th:text="${previsao.hora}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
